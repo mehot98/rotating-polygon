@@ -17,10 +17,11 @@ class App{
         this.moveX = 0;
         this.offsetX = 0;
 
-        document.addEventListener('pointerdown', this.onDown.bind(this), false);
-        document.addEventListener('pointermove', this.onMove.bind(this), false);
-        document.addEventListener('pointerup', this.onUp.bind(this), false);
+        document.addEventListener('touchstart', this.onDown.bind(this), false);
+        document.addEventListener('touchmove', this.onMove.bind(this), false);
+        document.addEventListener('touchend', this.onUp.bind(this), false);
 
+        
 
         window.requestAnimationFrame(this.animate.bind(this));
     }
@@ -55,13 +56,13 @@ class App{
     onDown(e){
         this.isDown = true;
         this.moveX = 0;
-        this.offsetX = e.clientX;
+        this.offsetX = e.touches[0].clientX;
     }
 
     onMove(e){
         if(this.isDown){
-            this.moveX = e.clientX - this.offsetX;
-            this.offsetX = e.clientX;
+            this.moveX = e.touches[0].clientX - this.offsetX;
+            this.offsetX = e.touches[0].clientX;
         }
 
     }
